@@ -77,9 +77,24 @@
                                                         <i class="fas fa-edit"></i>
                                                         Detail
                                                     </a>
-
-                                                </td>
-
+                                                    <form action="{{ route('qr_absens.destroy', $qr->id) }}" method="POST" class="d-inline"
+                                                        onsubmit="return confirm('Yakin ingin menghapus QR Absen ini?')">
+                                                      @csrf
+                                                      @method('DELETE')
+                                                      <button class="btn btn-sm btn-danger btn-icon">
+                                                          <i class="fas fa-trash"></i> Hapus
+                                                      </button>
+                                                    
+                                                  </form>
+                                                  <form method="POST" action="{{ route('qr_absens.destroyAll') }}" onsubmit="return confirm('Yakin ingin menghapus SEMUA QR Absen?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger mb-3">
+                                                        <i class="fas fa-trash"></i> Hapus Semua QR Absen
+                                                    </button>
+                                                </form>
+                                                
+                                              </td>
                                             </tr>
                                         @endforeach
 

@@ -59,6 +59,20 @@ class QrAbsenController extends Controller
     {
         return view('pages.qr_absen.create');
     }
+    public function destroy($id)
+    {
+        $qrAbsen = QrAbsen::findOrFail($id);
+        $qrAbsen->delete();
+
+        return redirect()->route('qr_absens.index')->with('success', 'QR Absen berhasil dihapus.');
+    }
+    public function destroyAll()
+{
+    QrAbsen::truncate();
+
+    return redirect()->route('qr_absens.index')->with('success', 'Semua data QR Absen telah dihapus.');
+}
+
 
     public function store(Request $request)
     {
