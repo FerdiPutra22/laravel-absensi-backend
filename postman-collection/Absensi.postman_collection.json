@@ -14,7 +14,7 @@
                 "header": [],
                 "body": {
                     "mode": "raw",
-                    "raw": "{\n    \"email\":\"bahri@fic16.com\",\n    \"password\":\"12345678\"\n}",
+                    "raw": "{\n    \"email\":\"mocha@gmail.com\",\n    \"password\":\"12345678\"\n}",
                     "options": {
                         "raw": {
                             "language": "json"
@@ -37,7 +37,7 @@
                         "header": [],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\":\"bahri@fic16.com\",\n    \"password\":\"12345678\"\n}",
+                            "raw": "{\n    \"email\":\"mocha@gmail.com\",\n    \"password\":\"12345678\"\n}",
                             "options": {
                                 "raw": {
                                     "language": "json"
