@@ -34,6 +34,16 @@
                                 <h4>All QR Absen</h4>
                             </div>
                             <div class="card-body">
+                                <div>
+                            </form>
+                            <form method="POST" action="{{ route('qr_absens.destroyAll') }}" onsubmit="return confirm('Yakin ingin menghapus SEMUA QR Absen?')">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger mb-3">
+                                  <i class="fas fa-trash"></i> Hapus Semua QR Absen
+                              </button>
+                          </form>
+                        </div>
 
                                 <div class="float-right">
                                     <form method="GET" action="{{ route('qr_absens.index') }}">
@@ -85,14 +95,7 @@
                                                           <i class="fas fa-trash"></i> Hapus
                                                       </button>
                                                     
-                                                  </form>
-                                                  <form method="POST" action="{{ route('qr_absens.destroyAll') }}" onsubmit="return confirm('Yakin ingin menghapus SEMUA QR Absen?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger mb-3">
-                                                        <i class="fas fa-trash"></i> Hapus Semua QR Absen
-                                                    </button>
-                                                </form>
+                                                  
                                                 
                                               </td>
                                             </tr>
