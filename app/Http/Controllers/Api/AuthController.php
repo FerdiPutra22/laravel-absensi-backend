@@ -81,4 +81,21 @@ class AuthController extends Controller
             'message' => 'FCM token updated',
         ], 200);
     }
+
+    public function updateLocation(Request $request)
+    {
+        $request->validate([
+            'latitude' => 'required',
+            'longitude' => 'required',
+        ]);
+
+        $user = $request->user();
+        $user->latitude = $request->latitude;
+        $user->longitude = $request->longitude;
+        $user->save();
+
+        return response([
+            'message' => 'Location updated',
+        ], 200);
+    }
 }
