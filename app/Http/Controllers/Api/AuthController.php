@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\HistoryLocation;
+use App\Models\LocationHistory;
+
 
 class AuthController extends Controller
 {
@@ -85,8 +88,8 @@ class AuthController extends Controller
     public function updateLocation(Request $request)
     {
         $request->validate([
-            'latitude' => 'required',
-            'longitude' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
         ]);
 
         $user = $request->user();
@@ -94,8 +97,19 @@ class AuthController extends Controller
         $user->longitude = $request->longitude;
         $user->save();
 
+        // Simpan ke tabel history
+        LocationHistory::create([
+            'user_id' => $user->id,
+            'date' => now(),
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+        ]);
+        // create table history location
+        // date, user_id, latitude, longitue
+
         return response([
             'message' => 'Location updated',
         ], 200);
     }
+
 }

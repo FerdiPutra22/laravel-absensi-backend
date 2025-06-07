@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -36,7 +37,7 @@ Route::apiResource('/api-notes', App\Http\Controllers\Api\NoteController::class)
 
 //update fcm token
 Route::post('/update-fcm-token', [App\Http\Controllers\Api\AuthController::class, 'updateFcmToken'])->middleware('auth:sanctum');
-Route::post('/update-location', [App\Http\Controllers\Api\AuthController::class, 'updateLocation'])->middleware('auth:sanctum');
+// Route::post('/update-location', [App\Http\Controllers\Api\AuthController::class, 'updateLocation'])->middleware('auth:sanctum');
 
 //get attendance
 Route::get('/api-attendances', [App\Http\Controllers\Api\AttendanceController::class, 'index'])->middleware('auth:sanctum');
@@ -47,3 +48,6 @@ Route::get('/api-user/{id}', [App\Http\Controllers\Api\UserController::class, 'g
 Route::post('/api-user/edit', [App\Http\Controllers\Api\UserController::class, 'updateProfile'])->middleware('auth:sanctum');
 
 Route::post('/check-qr', [App\Http\Controllers\Api\QrAbsenController::class, 'checkQR'])->middleware('auth:sanctum');
+
+Route::post('/update-location', [App\Http\Controllers\Api\LocationHistoryController::class, 'updateLocation'])->middleware('auth:sanctum');
+;

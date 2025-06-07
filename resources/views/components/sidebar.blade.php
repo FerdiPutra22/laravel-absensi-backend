@@ -43,7 +43,12 @@
                     <i class="fas fa-columns"></i>
                     <span>QR Absen</span>
                 </a>
-            </li>
+                <li class="{{ Request::is('location-histories*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('location-histories.index') }}">
+                        <i class="fas fa-map-marker-alt"></i><span>Location Histories</span>
+                    </a>
+                </li>
+                
 
     </aside>
 </div>
