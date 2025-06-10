@@ -55,7 +55,7 @@ class PermissionController extends Controller
         // $this->sendNotificationToUser($permission->user_id, 'Status Izin anda adalah ' . $str);
         if ($request->is_approved == 1) {
             Resend::emails()->send([
-                'from' =>  'onboarding@resend.dev',
+                'from' => 'onboarding@resend.dev',
                 'to' => $user->email,
                 'subject' => 'Approved Permission - ' . $user->name,
                 'html' => (new ApprovedPermissionConfirmation($user, $date, $reason))->render(),
@@ -80,4 +80,12 @@ class PermissionController extends Controller
 
         $messaging->send($message);
     }
+    public function destroy($id)
+    {
+        $permission = Permission::findOrFail($id);
+        $permission->delete();
+
+        return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully');
+    }
+
 }
