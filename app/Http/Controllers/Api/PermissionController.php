@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Permission;
+use Illuminate\Support\Facades\Storage;
+
 
 class PermissionController extends Controller
 {
@@ -31,5 +33,23 @@ class PermissionController extends Controller
         $permission->save();
 
         return response()->json(['message' => 'Permission created successfully'], 201);
+    }
+    public function destroy($id)
+    {
+        $permission = Permission::findOrFail($id);
+
+        // Jika ingin memastikan user hanya bisa hapus miliknya
+        if ($permission->user_id !== auth()->id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        // Hapus file gambar jika ada
+        if ($permission->image) {
+            \Storage::delete('public/permissions/' . $permission->image);
+        }
+
+        $permission->delete();
+
+        return response()->json(['message' => 'Permission deleted successfully'], 200);
     }
 }
