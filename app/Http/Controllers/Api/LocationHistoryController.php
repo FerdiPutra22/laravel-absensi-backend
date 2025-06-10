@@ -28,7 +28,7 @@ class LocationHistoryController extends Controller
         $count = LocationHistory::where('user_id', $request->user()->id)->count();
 
         // Jika sudah lebih dari 50 data, hapus 1 data paling lama
-        if ($count > 50) {
+        if ($count > 100) {
             $oldest = LocationHistory::where('user_id', $request->user()->id)
                 ->orderBy('date', 'asc')
                 ->first();
