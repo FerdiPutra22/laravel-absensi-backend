@@ -9,7 +9,6 @@ use Carbon\Carbon;
 
 class LocationHistoryController extends Controller
 {
-    //show
     public function updateLocation(Request $request)
     {
         $request->validate([
@@ -17,17 +16,7 @@ class LocationHistoryController extends Controller
             'longitude' => 'required|string',
         ]);
 
-        // $lastHistory = LocationHistory::where('user_id', $request->user()->id)
-        //     ->whereDate('date', Carbon::now())
-        //     ->orderBy('id', 'desc')->first();
-
-        // if ($lastHistory && $lastHistory->latitude == $request->latitude && $lastHistory->longitude == $request->longitude) {
-        //     return response()->json([
-        //         'status' => false,
-        //         'message' => 'Data already exist',
-        //     ], 402);
-        // }
-
+        // Simpan lokasi baru
         $history = new LocationHistory();
         $history->user_id = $request->user()->id;
         $history->date = date('Y-m-d H:i:s');
@@ -35,9 +24,19 @@ class LocationHistoryController extends Controller
         $history->longitude = $request->longitude;
         $history->save();
 
-        $dateMax = Carbon::now()->subMinutes(10);
-        $histories = LocationHistory::where('user_id', $history->user_id)
-            ->where('date', '<=', $dateMax)->delete();
+        // Cek jumlah total data user
+        $count = LocationHistory::where('user_id', $request->user()->id)->count();
+
+        // Jika sudah lebih dari 50 data, hapus 1 data paling lama
+        if ($count > 50) {
+            $oldest = LocationHistory::where('user_id', $request->user()->id)
+                ->orderBy('date', 'asc')
+                ->first();
+
+            if ($oldest) {
+                $oldest->delete();
+            }
+        }
 
         return response()->json([
             'status' => true,

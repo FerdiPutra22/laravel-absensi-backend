@@ -29,7 +29,7 @@
                 </div>
                 <h2 class="section-title">Permissions</h2>
                 <p class="section-lead">
-                    You can manage all Permissions, such as editing, deleting and more.
+                    Informasi tentang detail izin karyawan.
                 </p>
 
 

@@ -29,7 +29,7 @@
                 </div>
                 <h2 class="section-title">Attendances</h2>
                 <p class="section-lead">
-                    You can manage all Attendances, such as editing, deleting and more.
+                    Informasi Tentang Absensi Semua Sales
                 </p>
 
 

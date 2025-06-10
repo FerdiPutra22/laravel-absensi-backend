@@ -86,10 +86,10 @@
 
                                 </div>
                             </div>
-                            <div class="card-footer text-right">
+                            {{-- <div class="card-footer text-right">
                                 <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-primary">Edit
                                     Permission For Approve</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
