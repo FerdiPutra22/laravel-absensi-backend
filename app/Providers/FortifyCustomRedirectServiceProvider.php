@@ -5,15 +5,22 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class FortifyCustomRedirectServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        // Redirect setelah login sukses
+        // Custom login logic: autentikasi dengan email dan password
         Fortify::authenticateUsing(function (Request $request) {
-            // Login logic di sini (kalau mau custom login, misalnya status user)
-            return \App\Models\User::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
+
+            if ($user && Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+
+            return null; // login gagal jika user tidak ditemukan atau password salah
         });
 
         // Redirect setelah login berhasil
@@ -21,7 +28,7 @@ class FortifyCustomRedirectServiceProvider extends ServiceProvider
             return new class implements \Laravel\Fortify\Contracts\LoginResponse {
                 public function toResponse($request)
                 {
-                    return redirect('/users'); // Ganti dengan halaman tujuanmu
+                    return redirect('/users'); // Redirect ke halaman sesuai kebutuhan
                 }
             };
         });
