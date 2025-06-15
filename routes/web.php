@@ -26,4 +26,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('location-histories', LocationHistoryController::class)->middleware('auth');
     Route::delete('qr_absens-destroy-all', [QrAbsenController::class, 'destroyAll'])->name('qr_absens.destroyAll');
     Route::get('/qr-absens/{id}/download', [QrAbsenController::class, 'downloadPDF'])->name('qr_absens.download');
+    Route::delete('location-histories-destroy-all', [LocationHistoryController::class, 'destroyAll'])->name('location-histories.destroyAll');
 });

@@ -11,6 +11,12 @@ class LocationHistoryController extends Controller
         $locations = LocationHistory::with('user')->latest()->paginate(10);
         return view('pages.location_histories.index', compact('locations'));
     }
+    public function destroyAll()
+    {
+        LocationHistory::truncate();
+        return redirect()->back()->with('success', 'Semua data lokasi berhasil dihapus.');
+    }
+
 }
 
 

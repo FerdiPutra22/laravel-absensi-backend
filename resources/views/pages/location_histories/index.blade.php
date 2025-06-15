@@ -10,6 +10,22 @@
         </div>
 
         <div class="section-body">
+
+            {{-- Notifikasi sukses --}}
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            {{-- Tombol Hapus Semua --}}
+            <form action="{{ route('location-histories.destroyAll') }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus semua data?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger mb-3">Hapus Semua</button>
+            </form>
+
+            {{-- Tabel Data Lokasi --}}
             <table class="table table-bordered">
                 <thead>
                     <tr>

@@ -23,4 +23,5 @@ class LocationHistory extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
 }
