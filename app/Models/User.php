@@ -47,10 +47,11 @@ class User extends Authenticatable
     }
     public function getImageUrlPathAttribute()
     {
-        if ($this->image_url && Storage::disk('public')->exists($this->image_url)) {
-            return Storage::disk('public')->url($this->image_url);
-        }
-
-        return asset('images/users/default.png');
+    if ($this->image_url && Storage::disk('public')->exists($this->image_url)) {
+        return asset('storage/' . $this->image_url);
     }
+
+    return asset('images/users/default.png');
+    }
+
 }
