@@ -34,17 +34,25 @@
                         <th>Date</th>
                         <th>Latitude</th>
                         <th>Longitude</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($locations as $location)
-                        <tr>
-                            <td>{{ $location->id }}</td>
-                            <td>{{ $location->user->name ?? '-' }}</td>
-                            <td>{{ $location->date }}</td>
-                            <td>{{ $location->latitude }}</td>
-                            <td>{{ $location->longitude }}</td>
-                        </tr>
+                    <tr @if($location->is_out_of_range) style="background-color: #f8d7da;" @endif>
+                        <td>{{ $location->id }}</td>
+                        <td>{{ $location->user->name }}</td>
+                        <td>{{ $location->date }}</td>
+                        <td>{{ $location->latitude }}</td>
+                        <td>{{ $location->longitude }}</td>
+                        <td>
+                            @if($location->is_out_of_range)
+                                <span class="badge badge-danger">❌ Diluar Jangkauan</span>
+                            @else
+                                <span class="badge badge-success">✅ Dalam Jangkauan</span>
+                            @endif
+                        </td>
+                    </tr>                    
                     @endforeach
                 </tbody>
             </table>
